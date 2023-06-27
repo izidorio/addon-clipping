@@ -1,8 +1,25 @@
 {
-  "name": "Action API Demo",
-  "version": "1.0",
+  "name": "Clipping",
+  "description": "Encurta a url da página aberta e faz um resumo da notícia montando um clipping de notícias.",
+  "version": "0.0.1",
   "manifest_version": 3,
+  "author": "Bento, Izidorio <contato@bento.dev.br>",
+  "host_permissions": ["*://*/*"],
+  "permissions": ["activeTab", "scripting", "storage"],
   "action": {
-    "default_popup": "index.html"
+    "default_popup": "index.html",
+    "default_title": "Clipping.",
+    "default_icon": {
+      "16": "icons/16x16.png",
+      "32": "icons/32x32.png",
+      "48": "icons/48x48.png",
+      "128": "icons/128x128.png"
+    }
+  },
+  "icons": {
+    "16": "icons/16x16.png",
+    "32": "icons/32x32.png",
+    "48": "icons/48x48.png",
+    "128": "icons/128x128.png"
   }
 }
