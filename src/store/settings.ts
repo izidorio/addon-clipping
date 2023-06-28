@@ -9,17 +9,17 @@ interface Actions {
 
 export const useSettings = create<Settings & Actions>((set, get) => {
   return {
-    token: "",
+    bitlyToken: "",
     emoji_header: "✂️ Clipping ✂️",
     emoji_link: "🌐",
     emoji_resume: "💬",
     load: () => {
-      const values = store.get("settings");
+      const values = store.get<Settings | null>("settings");
       if (values) {
-        set(values as Settings);
+        set(values);
       }
-      const { token, emoji_header, emoji_link, emoji_resume } = get();
-      return { token, emoji_header, emoji_link, emoji_resume };
+      const { bitlyToken, emoji_header, emoji_link, emoji_resume } = get();
+      return { bitlyToken, emoji_header, emoji_link, emoji_resume };
     },
     update: (payload: Settings) => {
       set(payload);

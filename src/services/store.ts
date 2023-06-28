@@ -6,7 +6,7 @@ export const store = {
     localStorage.setItem(`@${manivest.name}_${key}`, valueParsed);
     return value;
   },
-  get(key: string): string | object {
+  get<T>(key: string): T {
     const value = localStorage.getItem(`@${manivest.name}_${key}`);
     return value ? JSON.parse(value) : null;
   },

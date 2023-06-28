@@ -1,21 +1,26 @@
 import { Button } from "./Button";
-import { api } from "../services";
-import { useSettings } from "../store";
+import { scrapeContentActivePage, shortenUrl } from "../services";
+import { Scissors } from "@phosphor-icons/react";
 
 export function ButtonAdd() {
-  const token = useSettings((s) => s.token);
   async function handleClipping() {
-    console.log("aqui ");
-
     const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
 
-    const response = await chrome.scripting.executeScript({
+    const [{ result }] = await chrome.scripting.executeScript({
       target: { tabId: tab.id as number },
-      func: api,
-      args: [token],
+      func: scrapeContentActivePage,
     });
 
-    console.log({ response });
+    console.log(result);
+    if (result) {
+      const shortUrl = await shortenUrl(result.urlActive);
+      console.log({ shortUrl });
+    }
   }
-  return <Button onClick={handleClipping}>Incluir</Button>;
+  return (
+    <Button onClick={handleClipping}>
+      <Scissors size={24} />
+      Incluir
+    </Button>
+  );
 }
