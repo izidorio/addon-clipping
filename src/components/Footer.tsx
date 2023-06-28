@@ -2,11 +2,28 @@ import { Coffee, Copy, Eraser, HeartStraight, X } from "@phosphor-icons/react";
 import { Button } from "./Button";
 import pixImage from "../../public/icons/pix.png";
 import { useState } from "react";
-import { useClipping } from "../store";
+import { useClipping, useSettings } from "../store";
+import copy from "copy-text-to-clipboard";
 
 export function Footer() {
   const [isShow, setIsShow] = useState(false);
+  const [emoji_header, emoji_link, emoji_resume] = useSettings((s) => [
+    s.emoji_header,
+    s.emoji_link,
+    s.emoji_resume,
+  ]);
   const clipping = useClipping((s) => s.clipping);
+
+  function handleCopyToClipboard() {
+    let text = `${emoji_header}\n`;
+
+    for (const item of clipping) {
+      text += `${emoji_link} ${item.link}\n`;
+      text += `${emoji_resume} *${item.title}* ${item.description}\n`;
+    }
+
+    copy(text);
+  }
 
   return (
     <div className="flex flex-col w-full px-4 gap-2 relative">
@@ -17,7 +34,11 @@ export function Footer() {
         <Button>
           <Eraser size={24} weight="bold" />
         </Button>
-        <Button width="full" disabled={clipping?.length > 0 ? false : true}>
+        <Button
+          onClick={handleCopyToClipboard}
+          width="full"
+          disabled={clipping?.length > 0 ? false : true}
+        >
           <Copy size={24} />
           Copiar para área de transferência
         </Button>
