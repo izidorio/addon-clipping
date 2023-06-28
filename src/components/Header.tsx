@@ -8,6 +8,7 @@ import { z } from "zod";
 import { useSettings } from "../store";
 import manifest from "../manifest.json";
 import { ButtonAdd } from "./ButtonAdd";
+import ReactInputMask from "react-input-mask";
 
 const formSchema = z.object({
   bitlyToken: z.string().nonempty("o token é obrigatório"),
@@ -86,11 +87,11 @@ export function Header() {
             </label>
           </div>
           <div className="flex-1">
-            <input
-              className="appearance-none border dark:border-zinc-400 rounded w-full py-2 px-3 text-gray-700 dark:text-zinc-100 dark:bg-zinc-800 leading-tight focus:outline-none data-[error=true]:border-red-500"
+            <ReactInputMask
               id="inline-full-name"
-              type="date"
-              value=""
+              mask="99/99/9999"
+              className="appearance-none border dark:border-zinc-400 rounded w-full py-2 px-3 text-gray-700 dark:text-zinc-100 dark:bg-zinc-800 leading-tight focus:outline-none data-[error=true]:border-red-500"
+              defaultValue={new Date().toLocaleDateString("pt-BR")}
             />
           </div>
         </div>
