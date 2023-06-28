@@ -1,11 +1,11 @@
 import { GearSix, X } from "@phosphor-icons/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Input } from "./Input";
 import { Button } from "./Button";
 import { FormProvider, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { store } from "../services";
+import { useSettings } from "../store";
 
 const formSchema = z.object({
   token: z.string().nonempty("o token é obrigatório"),
@@ -18,27 +18,25 @@ type formType = z.infer<typeof formSchema>;
 
 export function Header() {
   const [isShow, setIsShow] = useState(false);
+  const [load, update] = useSettings((s) => [s.load, s.update]);
 
   const methods = useForm<formType>({
     resolver: zodResolver(formSchema),
-    defaultValues: {
-      token: "",
-      emoji_header: "✂️ Clipping ✂️",
-      emoji_link: "🌐",
-      emoji_resume: "💬",
-    },
   });
 
+  useEffect(() => {
+    methods.reset(load());
+  }, [load, methods]);
+
   async function handleOnSubmit(payload: formType) {
-    store.set("settings", payload);
-    console.log({ payload });
+    update(payload);
   }
 
   return (
     <header className="flex w-full px-4 py-2 justify-between relative">
       <h1 className="font-medium dark:text-zinc-100">Clipping</h1>
       <GearSix
-        size={32}
+        size={24}
         className="dark:text-zinc-100 cursor-pointer"
         onClick={() => setIsShow(true)}
       />
