@@ -1,6 +1,7 @@
 import { GearSix, X } from "@phosphor-icons/react";
 import { useState } from "react";
 import { Input } from "./Input";
+import { Button } from "./Button";
 
 export function Header() {
   const [isShow, setIsShow] = useState(false);
@@ -26,19 +27,14 @@ export function Header() {
         <form className="dark:bg-zinc-800 px-8 pt-6 pb-8 mb-4 w-full">
           <Input label="Bitly Token" name="token" type="password" />
           <Input label="Cabeçalho" name="header" />
-          <div className="flex gap-4">
+          <div className="flex gap-4 mb-4">
             <Input label="Emoji link" name="emoji_link" />
             <Input label="Emoji Resumo" name="emoji_resume" />
           </div>
 
-          <div className="flex items-center justify-between">
-            <button
-              className="bg-blue-500 hover:bg-blue-700 text-white font-bold w-full py-2  rounded focus:outline-none focus:shadow-outline"
-              type="submit"
-            >
-              Salvar
-            </button>
-          </div>
+          <Button width="full" type="submit">
+            Salvar
+          </Button>
         </form>
       </div>
     </header>
