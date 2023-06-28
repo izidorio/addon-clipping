@@ -37,10 +37,12 @@ export function Header() {
 
   return (
     <header className="flex flex-col w-full relative">
-      <div className="flex w-full px-4 py-2 justify-between relative">
+      <div className="flex w-full px-4 py-2 justify-between items-center relative">
         <h1 className="flex flex-col font-medium dark:text-zinc-100">
           Clipping
-          <small className="font-light text-[0.5rem]">versão {manifest.version}</small>
+          <small className="font-light text-[0.5rem] dark:text-zinc-300">
+            versão {manifest.version}
+          </small>
         </h1>
         <GearSix
           size={24}
@@ -76,21 +78,15 @@ export function Header() {
           </FormProvider>
         </div>
       </div>
-      <div className="flex w-full gap-4 px-4 py-2">
-        <div className="flex items-center">
-          <div className="flex-shrink-0">
-            <label
-              className="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4"
-              htmlFor="inline-full-name"
-            >
-              <Calendar size={24} />
-            </label>
-          </div>
-          <div className="flex-1">
+      <div className="flex w-full gap-4 px-4 ">
+        <div className="flex items-center text-gray-700 dark:text-zinc-100 border dark:border-zinc-500 rounded px-2">
+          <Calendar size={24} className="dark:text-zinc-500" />
+          <div className="w-[5.5rem]">
             <ReactInputMask
               id="inline-full-name"
               mask="99/99/9999"
-              className="appearance-none border dark:border-zinc-400 rounded w-full py-2 px-3 text-gray-700 dark:text-zinc-100 dark:bg-zinc-800 leading-tight focus:outline-none data-[error=true]:border-red-500"
+              placeholder="99/99/9999"
+              className="appearance-none text-xs border-0 w-full px-2 py-2 dark:bg-zinc-800 leading-tight focus:outline-none"
               defaultValue={new Date().toLocaleDateString("pt-BR")}
             />
           </div>

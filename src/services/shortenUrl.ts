@@ -1,6 +1,14 @@
 import { Settings } from "../types";
 import { store } from "./store";
-export async function shortenUrl(urlActive: string) {
+
+export type ScrapeContentActivePageData = {
+  id: string;
+  link: string;
+  long_url: string;
+  created_at: string;
+};
+
+export async function shortenUrl(urlActive: string): Promise<ScrapeContentActivePageData | Error> {
   const { bitlyToken } = store.get<Settings>("settings");
 
   const response = await fetch("https://api-ssl.bitly.com/v4/shorten", {
@@ -17,7 +25,10 @@ export async function shortenUrl(urlActive: string) {
     }),
   });
 
-  const jsonData = await response.json();
+  if (response.status == 200 || response.status == 201) {
+    const jsonData = await response.json();
+    return jsonData as ScrapeContentActivePageData;
+  }
 
-  return { jsonData };
+  throw new Error("Erro ao encurtar a url");
 }
