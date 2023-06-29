@@ -8,13 +8,13 @@ import { toast } from "react-toastify";
 
 export function Footer() {
   const [isShow, setIsShow] = useState(false);
-  const [emoji_header, emoji_link, emoji_resume, dateClipping] = useSettings((s) => [
-    s.emoji_header,
-    s.emoji_link,
-    s.emoji_resume,
-    s.dateClipping,
+  const [emoji_header, emoji_link, emoji_resume, dateClipping] = useSettings(
+    (s) => [s.emoji_header, s.emoji_link, s.emoji_resume, s.dateClipping]
+  );
+  const [clipping, clearAllClipping] = useClipping((s) => [
+    s.clipping,
+    s.clearAll,
   ]);
-  const [clipping, clearAllClipping] = useClipping((s) => [s.clipping, s.clearAll]);
 
   function handleCopyToClipboard() {
     let text = `${emoji_header}\n🗓️ ${dateClipping}\n`;
@@ -64,18 +64,24 @@ export function Footer() {
       </div>
       <div
         data-show={isShow}
-        className="hidden flex-col justify-center items-center absolute top-0 left-0 right-0 dark:bg-zinc-800 gap-1 py-2 dark:text-zinc-300 data-[show=true]:flex"
+        className="hidden flex-col justify-center items-center absolute top-0 left-0 right-0 bg-white shadow dark:bg-zinc-800 gap-1 py-2 dark:text-zinc-300 data-[show=true]:flex"
       >
         <X
           size={24}
           weight="bold"
-          className="absolute top-0 right-4 hover:brightness-125 cursor-pointer"
+          className="absolute top-4 right-4 hover:brightness-125 cursor-pointer"
           onClick={() => setIsShow(false)}
         />
         pix
-        <img src={pixImage} alt="qr code do pix" className="bg-white w-20 h-20 mb-4" />
+        <img
+          src={pixImage}
+          alt="qr code do pix"
+          className="bg-white w-20 h-20 mb-4"
+        />
         <div className="flex justify-center items-center gap-1 font-light text-xs">
-          Made with <HeartStraight size={12} weight="bold" className="text-red-500" /> by bento.dev
+          Made with{" "}
+          <HeartStraight size={12} weight="bold" className="text-red-500" /> by
+          bento.dev
         </div>
       </div>
     </div>

@@ -12,7 +12,8 @@ dist
 dist-ssr
 *.local
 .env
-
+addon-clipping
+*.zip
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

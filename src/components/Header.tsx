@@ -62,7 +62,7 @@ export function Header() {
         />
         <div
           data-show={isShow}
-          className="absolute top-0 left-0 right-0 hidden data-[show=true]:flex dark:bg-zinc-800 z-10"
+          className="absolute top-0 left-0 right-0 hidden data-[show=true]:flex bg-white shadow dark:bg-zinc-800 z-10"
         >
           <X
             size={24}

@@ -40,8 +40,8 @@ const data = [
     title: "Empresa brasileira tem fazendas avaliadas em R$ 10,9 bilhões",
   },
 ];
-**/
 
+**/
 interface Props {
   clipping: Clipping[];
   load: () => Clipping[];
