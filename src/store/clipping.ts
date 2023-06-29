@@ -47,6 +47,7 @@ interface Props {
   load: () => Clipping[];
   update: (payload: Clipping) => void;
   delete: (id: string) => void;
+  clearAll: () => void;
 }
 
 export const useClipping = create<Props>((set, get) => {
@@ -72,6 +73,10 @@ export const useClipping = create<Props>((set, get) => {
       const clippingFiltered = clipping.filter((clipping) => clipping.id != id);
       set(() => ({ clipping: [...clippingFiltered] }));
       store.set("clipping", [...clippingFiltered]);
+    },
+    clearAll: () => {
+      set(() => ({ clipping: [] }));
+      store.delete("clipping");
     },
   };
 });

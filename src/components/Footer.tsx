@@ -4,18 +4,20 @@ import pixImage from "../../public/icons/pix.png";
 import { useState } from "react";
 import { useClipping, useSettings } from "../store";
 import copy from "copy-text-to-clipboard";
+import { toast } from "react-toastify";
 
 export function Footer() {
   const [isShow, setIsShow] = useState(false);
-  const [emoji_header, emoji_link, emoji_resume] = useSettings((s) => [
+  const [emoji_header, emoji_link, emoji_resume, dateClipping] = useSettings((s) => [
     s.emoji_header,
     s.emoji_link,
     s.emoji_resume,
+    s.dateClipping,
   ]);
-  const clipping = useClipping((s) => s.clipping);
+  const [clipping, clearAllClipping] = useClipping((s) => [s.clipping, s.clearAll]);
 
   function handleCopyToClipboard() {
-    let text = `${emoji_header}\n`;
+    let text = `${emoji_header}\n🗓️ ${dateClipping}\n`;
 
     for (const item of clipping) {
       text += `${emoji_link} ${item.link}\n`;
@@ -23,6 +25,12 @@ export function Footer() {
     }
 
     copy(text);
+    toast.success("Copiado com sucesso!");
+  }
+
+  function handleClearAllClipping() {
+    clearAllClipping();
+    toast.success("Clipping removidos com sucesso");
   }
 
   return (
@@ -31,7 +39,7 @@ export function Footer() {
         {clipping.length} notícia{clipping.length > 1 && "s"}
       </div>
       <div className="flex gap-2">
-        <Button>
+        <Button onClick={handleClearAllClipping}>
           <Eraser size={24} weight="bold" />
         </Button>
         <Button

@@ -9,6 +9,7 @@ import { useSettings } from "../store";
 import manifest from "../manifest.json";
 import { ButtonAdd } from "./ButtonAdd";
 import ReactInputMask from "react-input-mask";
+import { toast } from "react-toastify";
 
 const formSchema = z.object({
   bitlyToken: z.string().nonempty("o token é obrigatório"),
@@ -21,7 +22,11 @@ type formType = z.infer<typeof formSchema>;
 
 export function Header() {
   const [isShow, setIsShow] = useState(false);
-  const [load, update] = useSettings((s) => [s.load, s.update]);
+  const [load, update, updateDateCLipping] = useSettings((s) => [
+    s.load,
+    s.update,
+    s.updateDateClipping,
+  ]);
 
   const methods = useForm<formType>({
     resolver: zodResolver(formSchema),
@@ -33,12 +38,18 @@ export function Header() {
 
   async function handleOnSubmit(payload: formType) {
     update(payload);
+    setIsShow(false);
+    toast.success("Preferências salvas com sucesso!");
+  }
+
+  function handleUpdateDateClipping(e: React.ChangeEvent<HTMLInputElement>) {
+    updateDateCLipping(e.currentTarget.value);
   }
 
   return (
     <header className="flex flex-col w-full relative">
-      <div className="flex w-full px-4 py-2 justify-between items-center relative">
-        <h1 className="flex flex-col font-medium dark:text-zinc-100">
+      <div className="flex w-full px-4 justify-between items-center relative">
+        <h1 className="flex flex-col font-lg mb-2 font-medium dark:text-zinc-100">
           Clipping
           <small className="font-light text-[0.5rem] dark:text-zinc-300">
             versão {manifest.version}
@@ -51,7 +62,7 @@ export function Header() {
         />
         <div
           data-show={isShow}
-          className="absolute top-0 left-0 right-0 hidden data-[show=true]:flex"
+          className="absolute top-0 left-0 right-0 hidden data-[show=true]:flex dark:bg-zinc-800 z-10"
         >
           <X
             size={24}
@@ -88,6 +99,7 @@ export function Header() {
               placeholder="99/99/9999"
               className="appearance-none text-xs border-0 w-full px-2 py-2 dark:bg-zinc-800 leading-tight focus:outline-none"
               defaultValue={new Date().toLocaleDateString("pt-BR")}
+              onChange={handleUpdateDateClipping}
             />
           </div>
         </div>

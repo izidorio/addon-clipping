@@ -3,4 +3,5 @@ export interface Settings {
   emoji_header: string;
   emoji_link: string;
   emoji_resume: string;
+  dateClipping: string;
 }
