@@ -26,9 +26,38 @@ Faz a captura da página aberta criando um resumo e encurtando a url ( utilizand
    `Generate token ` https://app.bitly.com/settings/api
    <center>
    <img src="./commons/02.png" width="400">
-   <center>
+   </center>
 
 7. Cole o Token em **preferências**. Você também poderá alterar os outros valores do cabeçalho e emojis se desejar
 <center>
 
 ![](./commons/03.png)
+
+</center>
+
+## Guia para desenvolvedor
+
+clone o repositório
+
+```bash
+git clone git@github.com:izidorio/addon-clipping.git
+```
+
+mova-se para o diretório do projeto e instales as dependências
+
+```bash
+cd addon-clipping
+npm install
+```
+
+faça o build do projeto
+
+```
+npm run build
+```
+
+Abra o gerenciador de extensões do Chrome.
+
+Habilite o Modo do desenvolvedor.
+
+Carregue a extensão clicando no botão: Carregar sem compactação e depois selecione a pasta `/dist`
