@@ -35,7 +35,7 @@ Faz a captura da página aberta criando um resumo e encurtando a url ( utilizand
 
 </center>
 
-## Guia para desenvolvedor
+## Guia para desenvolvedores
 
 clone o repositório
 
