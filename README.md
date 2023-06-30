@@ -35,7 +35,7 @@ Faz a captura da página aberta criando um resumo e encurtando a url ( utilizand
 
 </center>
 
-## Guia para desenvolvedor
+## Guia para desenvolvedores
 
 clone o repositório
 
@@ -43,7 +43,7 @@ clone o repositório
 git clone git@github.com:izidorio/addon-clipping.git
 ```
 
-mova-se para o diretório do projeto e instales as dependências
+mova-se para o diretório do projeto e instale as dependências
 
 ```bash
 cd addon-clipping
