@@ -9,7 +9,13 @@ export type ScrapeContentActivePageData = {
 };
 
 export async function shortenUrl(urlActive: string): Promise<ScrapeContentActivePageData | Error> {
-  const { bitlyToken } = store.get<Settings>("settings");
+  const settings = store.get<Settings>("settings");
+
+  if (!settings) {
+    return new Error(
+      "Você precisa adicionar o Token da api do Bitly para consegui encurtar o url da página"
+    );
+  }
 
   const response = await fetch("https://api-ssl.bitly.com/v4/shorten", {
     mode: "cors",
@@ -17,7 +23,7 @@ export async function shortenUrl(urlActive: string): Promise<ScrapeContentActive
     headers: {
       "Content-Type": "application/json",
       "Access-Control-Allow-Origin": "*",
-      Authorization: `Bearer ${bitlyToken}`,
+      Authorization: `Bearer ${settings.bitlyToken}`,
     },
     body: JSON.stringify({
       domain: "bit.ly",
@@ -30,5 +36,7 @@ export async function shortenUrl(urlActive: string): Promise<ScrapeContentActive
     return jsonData as ScrapeContentActivePageData;
   }
 
-  throw new Error("Erro ao encurtar a url");
+  return new Error(
+    "Erro ao encurtar a url. Verifique se o seu Token continua válido ou se há algum problema com sua conta da Bitly."
+  );
 }

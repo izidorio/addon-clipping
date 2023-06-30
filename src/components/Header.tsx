@@ -1,4 +1,4 @@
-import { Calendar, GearSix, X } from "@phosphor-icons/react";
+import { Calendar, GearSix, Info, X } from "@phosphor-icons/react";
 import { useEffect, useState } from "react";
 import { Input } from "./Input";
 import { Button } from "./Button";
@@ -9,7 +9,7 @@ import { useSettings } from "../store";
 import manifest from "../manifest.json";
 import { ButtonAdd } from "./ButtonAdd";
 import ReactInputMask from "react-input-mask";
-import { toast } from "react-toastify";
+import { toast } from "../utils";
 
 const formSchema = z.object({
   bitlyToken: z.string().nonempty("o token é obrigatório"),
@@ -50,7 +50,15 @@ export function Header() {
     <header className="flex flex-col w-full relative">
       <div className="flex w-full px-4 justify-between items-center relative">
         <h1 className="flex flex-col font-lg mb-2 font-medium dark:text-zinc-100">
-          Clipping
+          <a
+            href="https://github.com/izidorio/addon-clipping#readme"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex gap-1 items-center cursor-pointer"
+          >
+            Clipping
+            <Info size={16} />
+          </a>
           <small className="font-light text-[0.5rem] dark:text-zinc-300">
             versão {manifest.version}
           </small>

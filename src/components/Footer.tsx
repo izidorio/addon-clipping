@@ -4,17 +4,17 @@ import pixImage from "../../public/icons/pix.png";
 import { useState } from "react";
 import { useClipping, useSettings } from "../store";
 import copy from "copy-text-to-clipboard";
-import { toast } from "react-toastify";
+import { toast } from "../utils";
 
 export function Footer() {
   const [isShow, setIsShow] = useState(false);
-  const [emoji_header, emoji_link, emoji_resume, dateClipping] = useSettings(
-    (s) => [s.emoji_header, s.emoji_link, s.emoji_resume, s.dateClipping]
-  );
-  const [clipping, clearAllClipping] = useClipping((s) => [
-    s.clipping,
-    s.clearAll,
+  const [emoji_header, emoji_link, emoji_resume, dateClipping] = useSettings((s) => [
+    s.emoji_header,
+    s.emoji_link,
+    s.emoji_resume,
+    s.dateClipping,
   ]);
+  const [clipping, clearAllClipping] = useClipping((s) => [s.clipping, s.clearAll]);
 
   function handleCopyToClipboard() {
     let text = `${emoji_header}\n🗓️ ${dateClipping}\n`;
@@ -73,15 +73,9 @@ export function Footer() {
           onClick={() => setIsShow(false)}
         />
         pix
-        <img
-          src={pixImage}
-          alt="qr code do pix"
-          className="bg-white w-20 h-20 mb-4"
-        />
+        <img src={pixImage} alt="qr code do pix" className="bg-white w-20 h-20 mb-4" />
         <div className="flex justify-center items-center gap-1 font-light text-xs">
-          Made with{" "}
-          <HeartStraight size={12} weight="bold" className="text-red-500" /> by
-          bento.dev
+          Made with <HeartStraight size={12} weight="bold" className="text-red-500" /> by bento.dev
         </div>
       </div>
     </div>

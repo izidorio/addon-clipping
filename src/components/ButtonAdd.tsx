@@ -2,6 +2,7 @@ import { Button } from "./Button";
 import { scrapeContentActivePage, shortenUrl } from "../services";
 import { MagicWand } from "@phosphor-icons/react";
 import { useClipping } from "../store";
+import { toast } from "../utils";
 
 export function ButtonAdd() {
   const updateClipping = useClipping((s) => s.update);
@@ -17,11 +18,10 @@ export function ButtonAdd() {
       const shortUrl = await shortenUrl(result.urlActive);
 
       if (shortUrl instanceof Error) {
-        //TODO tratar o error
+        toast.error(shortUrl.message);
         return;
       }
 
-      //TODO salva o dado o store
       updateClipping({
         id: shortUrl.id,
         link: shortUrl.link,
