@@ -43,6 +43,8 @@ const data = [
 
 **/
 interface Props {
+  isLoading: boolean;
+  setLoading: (value: boolean) => void;
   clipping: Clipping[];
   load: () => Clipping[];
   update: (payload: Clipping) => void;
@@ -52,6 +54,8 @@ interface Props {
 
 export const useClipping = create<Props>((set, get) => {
   return {
+    isLoading: false,
+    setLoading: (value: boolean) => set(() => ({ isLoading: value })),
     clipping: [],
     load: () => {
       const storeClipping = store.get<Clipping[] | null>("clipping");

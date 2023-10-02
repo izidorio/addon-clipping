@@ -18,7 +18,7 @@ export function Clipping({ clipping }: ClippingProps) {
 
   return (
     <div ref={refDiv} className="flex flex-col px-4 py-1">
-      <div className="flex gap-1">
+      <div className="flex gap-1 justify-between">
         <div className="flex flex-col">
           <a
             href={clipping.link}

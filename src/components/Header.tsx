@@ -12,7 +12,7 @@ import ReactInputMask from "react-input-mask";
 import { toast } from "../utils";
 
 const formSchema = z.object({
-  bitlyToken: z.string().nonempty("o token é obrigatório"),
+  // bitlyToken: z.string().nonempty("o token é obrigatório"),
   emoji_header: z.string(),
   emoji_link: z.string(),
   emoji_resume: z.string(),
@@ -83,7 +83,7 @@ export function Header() {
               className="dark:bg-zinc-800 px-8 pt-6 pb-8 mb-4 w-full"
               onSubmit={methods.handleSubmit(handleOnSubmit)}
             >
-              <Input label="Bitly Token" name="bitlyToken" type="password" />
+              {/* <Input label="Bitly Token" name="bitlyToken" type="password" /> */}
               <Input label="Cabeçalho" name="emoji_header" />
               <div className="flex gap-4 mb-4">
                 <Input label="Emoji link" name="emoji_link" />
