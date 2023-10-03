@@ -1,7 +1,7 @@
 {
   "name": "Clipping",
   "description": "Encurta a url da página aberta e faz um resumo da notícia montando um clipping de notícias.",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "manifest_version": 3,
   "author": "Bento, Izidorio <contato@bento.dev.br>",
   "host_permissions": ["*://*/*"],

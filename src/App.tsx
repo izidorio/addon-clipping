@@ -6,7 +6,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   return (
-    <div className="flex flex-col items-center gap-4 w-96 dark:bg-zinc-800">
+    <div className="flex flex-col items-center gap-4 w-96 bg-zinc-50 dark:bg-zinc-800">
       <ToastContainer
         position="top-center"
         autoClose={5000}
