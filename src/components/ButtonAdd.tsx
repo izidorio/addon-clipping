@@ -1,5 +1,5 @@
 import { Button } from "./Button";
-import { scrapeContentActivePage, encurtadorDev } from "../services";
+import { scrapeContentActivePage, shortIo } from "../services";
 import { MagicWand } from "@phosphor-icons/react";
 import { useClipping } from "../store";
 import { toast } from "../utils";
@@ -22,7 +22,7 @@ export function ButtonAdd() {
 
     if (result) {
       // const shortUrl = await shortenUrl(result.urlActive);
-      const shortUrl = await encurtadorDev(result.urlActive);
+      const shortUrl = await shortIo(result.urlActive);
 
       if (shortUrl instanceof Error) {
         toast.error(shortUrl.message);

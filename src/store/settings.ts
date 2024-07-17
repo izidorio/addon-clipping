@@ -10,7 +10,8 @@ interface Actions {
 
 export const useSettings = create<Settings & Actions>((set, get) => {
   return {
-    bitlyToken: "",
+    short_io_domain: "",
+    short_io_token: "",
     emoji_header: "✂️ Clipping ✂️",
     emoji_link: "🌐",
     emoji_resume: "💬",
@@ -20,8 +21,22 @@ export const useSettings = create<Settings & Actions>((set, get) => {
       if (values) {
         set(values);
       }
-      const { bitlyToken, emoji_header, emoji_link, emoji_resume, dateClipping } = get();
-      return { bitlyToken, emoji_header, emoji_link, emoji_resume, dateClipping };
+      const {
+        short_io_domain,
+        short_io_token,
+        emoji_header,
+        emoji_link,
+        emoji_resume,
+        dateClipping,
+      } = get();
+      return {
+        short_io_domain,
+        short_io_token,
+        emoji_header,
+        emoji_link,
+        emoji_resume,
+        dateClipping,
+      };
     },
     update: (payload: Partial<Settings>) => {
       set((s) => ({ ...s, ...payload }));
