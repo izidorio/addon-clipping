@@ -8,7 +8,7 @@ Faz a captura da página aberta criando um resumo e encurtando a url ( utilizand
 
 ## Guia para instalar a extensão
 
-1. Baixe a última versão do `addon-clipping ` [clicando aqui neste link.](https://github.com/izidorio/addon-clipping/releases/download/v1.1.0/addon-clipping.zip)
+1. Baixe a última versão do `addon-clipping ` [clicando aqui neste link.](https://github.com/izidorio/addon-clipping/releases/download/v1.2.0/addon-clipping.zip)
 
 2. Descompacte o arquivo `addon-clipping.zip` baixado.
 
