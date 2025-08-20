@@ -21,10 +21,11 @@ Faz a captura da página aberta criando um resumo e encurtando a url ( utilizand
 <img src="./commons/01.png" width="400">
 </center>
 
-6. A nova versão 1.2.0 utiliza a API do [short.io](https://short.io)
+6. A nova versão 1.3.0 utiliza a API do [shlink](https://shlink.io)
 
-7. Crie uma conta no [short.io](https://short.io) e obtenha a sua chave de API.
-   > A chave de API é necessária para encurtar a URL do clipping. insira o domínio da sua conta short.io e a chave de API no campo de configuração da extensão.
+7. self-hosted URL shortener [shlink.io](https://shlink.io) mantenha o seu serviço de encurtar links.
+   > A chave de API é necessária para encurtar a URL do clipping. insira o domínio do seu servidor e token no campo de configuração da extensão.
+8. use o guia do [OrionDesign](https://oriondesign.art.br/) para criar o seu Servidor e instalar o SHLINK, no minuto 02:19:49, do vídeo [https://www.youtube.com/watch?v=aFfwJ7-tZSQ&list=PLXIKBG6VLkoE-OmQXenc-8vD1Hrb6mJ1t](https://www.youtube.com/watch?v=aFfwJ7-tZSQ&list=PLXIKBG6VLkoE-OmQXenc-8vD1Hrb6mJ1t) exemplifica o funcionamento da ferramenta: SH Link (Opção 78)
 
 ## Guia para desenvolvedores
 
