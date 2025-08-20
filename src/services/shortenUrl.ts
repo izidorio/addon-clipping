@@ -1,6 +1,10 @@
 import { Settings } from "../types";
 import { store } from "./store";
 
+import type { ServerInfo } from '@shlinkio/shlink-js-sdk';
+import { ShlinkApiClient } from '@shlinkio/shlink-js-sdk';
+import { FetchHttpClient } from '@shlinkio/shlink-js-sdk/fetch';
+
 export type ScrapeContentActivePageData = {
   id: string;
   link: string;
@@ -27,7 +31,7 @@ export async function shortenUrl(urlActive: string): Promise<ScrapeContentActive
     headers: {
       "Content-Type": "application/json",
       "Access-Control-Allow-Origin": "*",
-      Authorization: `Bearer ${settings.bitlyToken}`,
+      Authorization: `Bearer ${settings.token}`,
     },
     body: JSON.stringify({
       domain: "bit.ly",
@@ -66,4 +70,58 @@ export async function encurtadorDev(urlActive: string): Promise<EncurtadorDevDat
   return new Error(
     "Erro ao encurtar a url. Verifique se encurtador.dev está ativo ou se há uma nova versão o addon-clipping."
   );
+}
+
+export async function shortIo(urlActive: string): Promise<EncurtadorDevData | Error> {
+  const settings = store.get<Settings>("settings");
+
+  if (!settings || !settings.token || !settings.domain) {
+    return { urlEncurtada: urlActive } as EncurtadorDevData;
+
+    return new Error(
+      "Você precisa adicionar o Token da api do Bitly para consegui encurtar o url da página"
+    );
+  }
+
+  const response = await fetch("https://api.short.io/links", {
+    mode: "cors",
+    method: "POST",
+    headers: {
+      authorization: settings.token,
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*",
+    },
+    body: JSON.stringify({
+      domain: settings.domain,
+      originalURL: urlActive,
+    }),
+  });
+
+  if (response.status == 200 || response.status == 201) {
+    const jsonData = await response.json();
+    console.log(jsonData.shortURL);
+
+    return { urlEncurtada: jsonData.shortURL } as EncurtadorDevData;
+  }
+
+  return new Error(
+    "Erro ao encurtar a url. Verifique se encurtador.dev está ativo ou se há uma nova versão o addon-clipping."
+  );
+}
+
+
+export async function shlink(urlActive: string): Promise<EncurtadorDevData | Error> {
+  const settings = store.get<Settings>("settings");
+
+  const serverInfo: ServerInfo = {
+    baseUrl: settings.domain,
+    apiKey: settings.token,
+  };
+  const apiClient = new ShlinkApiClient(new FetchHttpClient(), serverInfo);
+
+  const shortUrl = await apiClient.createShortUrl({
+    longUrl: urlActive,  
+  });
+
+  return { urlEncurtada: shortUrl.shortUrl } as EncurtadorDevData;
 }

@@ -1,53 +1,14 @@
 import { create } from "zustand";
 import { Clipping } from "../types";
 import { store } from "../services";
-/** 
-const data = [
-  {
-    id: "bit.ly/3PzL1ND",
-    link: "https://bit.ly/3PzL1ND",
-    long_url:
-      "https://revistaoeste.com/agronegocio/empresa-do-agro-tem-fazendas-avaliadas-em-r-109-bilhoes/",
-    description:
-      "A empresa brasileira SLC Agrícola atingiu o valor recorde de R$ 10,9 bilhões em propriedades no agricultáveis. Clique para ver mais.",
-    title: "Empresa brasileira tem fazendas avaliadas em R$ 10,9 bilhões",
-  },
-  {
-    id: "bit.ly/3PzL1D",
-    link: "https://bit.ly/3PzL1ND",
-    long_url:
-      "https://revistaoeste.com/agronegocio/empresa-do-agro-tem-fazendas-avaliadas-em-r-109-bilhoes/",
-    description:
-      "A empresa brasileira SLC Agrícola atingiu o valor recorde de R$ 10,9 bilhões em propriedades no agricultáveis. Clique para ver mais.",
-    title: "Empresa brasileira tem fazendas avaliadas em R$ 10,9 bilhões",
-  },
-  {
-    id: "bit.ly/3PzLND",
-    link: "https://bit.ly/3PzL1ND",
-    long_url:
-      "https://revistaoeste.com/agronegocio/empresa-do-agro-tem-fazendas-avaliadas-em-r-109-bilhoes/",
-    description:
-      "A empresa brasileira SLC Agrícola atingiu o valor recorde de R$ 10,9 bilhões em propriedades no agricultáveis. Clique para ver mais.",
-    title: "Empresa brasileira tem fazendas avaliadas em R$ 10,9 bilhões",
-  },
-  {
-    id: "bit.ly/3PL1ND",
-    link: "https://bit.ly/3PzL1ND",
-    long_url:
-      "https://revistaoeste.com/agronegocio/empresa-do-agro-tem-fazendas-avaliadas-em-r-109-bilhoes/",
-    description:
-      "A empresa brasileira SLC Agrícola atingiu o valor recorde de R$ 10,9 bilhões em propriedades no agricultáveis. Clique para ver mais.",
-    title: "Empresa brasileira tem fazendas avaliadas em R$ 10,9 bilhões",
-  },
-];
 
-**/
 interface Props {
   isLoading: boolean;
   setLoading: (value: boolean) => void;
   clipping: Clipping[];
   load: () => Clipping[];
   update: (payload: Clipping) => void;
+  edit: (id: string, payload: Partial<Clipping>) => void;
   delete: (id: string) => void;
   clearAll: () => void;
 }
@@ -71,6 +32,14 @@ export const useClipping = create<Props>((set, get) => {
       const { clipping } = get();
       set(() => ({ clipping: [payload, ...clipping] }));
       store.set("clipping", [payload, ...clipping]);
+    },
+    edit: (id: string, payload: Partial<Clipping>) => {
+      const { clipping } = get();
+      const clippingUpdated = clipping.map((item) => 
+        item.id === id ? { ...item, ...payload } : item
+      );
+      set(() => ({ clipping: [...clippingUpdated] }));
+      store.set("clipping", [...clippingUpdated]);
     },
     delete: (id: string) => {
       const { clipping } = get();

@@ -8,7 +8,7 @@ export const store = {
   },
   get<T>(key: string): T {
     const value = localStorage.getItem(`@${manivest.name}_${key}`);
-    return value ? JSON.parse(value) : null;
+    return value ? JSON.parse(value) : null as T;
   },
   delete(key: string): void {
     localStorage.removeItem(`@${manivest.name}_${key}`);
