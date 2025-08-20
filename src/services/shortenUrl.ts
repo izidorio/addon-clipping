@@ -1,6 +1,10 @@
 import { Settings } from "../types";
 import { store } from "./store";
 
+import type { ServerInfo } from '@shlinkio/shlink-js-sdk';
+import { ShlinkApiClient } from '@shlinkio/shlink-js-sdk';
+import { FetchHttpClient } from '@shlinkio/shlink-js-sdk/fetch';
+
 export type ScrapeContentActivePageData = {
   id: string;
   link: string;
@@ -27,7 +31,7 @@ export async function shortenUrl(urlActive: string): Promise<ScrapeContentActive
     headers: {
       "Content-Type": "application/json",
       "Access-Control-Allow-Origin": "*",
-      Authorization: `Bearer ${settings.short_io_token}`,
+      Authorization: `Bearer ${settings.token}`,
     },
     body: JSON.stringify({
       domain: "bit.ly",
@@ -71,7 +75,7 @@ export async function encurtadorDev(urlActive: string): Promise<EncurtadorDevDat
 export async function shortIo(urlActive: string): Promise<EncurtadorDevData | Error> {
   const settings = store.get<Settings>("settings");
 
-  if (!settings || !settings.short_io_token || !settings.short_io_domain) {
+  if (!settings || !settings.token || !settings.domain) {
     return { urlEncurtada: urlActive } as EncurtadorDevData;
 
     return new Error(
@@ -83,12 +87,12 @@ export async function shortIo(urlActive: string): Promise<EncurtadorDevData | Er
     mode: "cors",
     method: "POST",
     headers: {
-      authorization: settings.short_io_token,
+      authorization: settings.token,
       "Content-Type": "application/json",
       "Access-Control-Allow-Origin": "*",
     },
     body: JSON.stringify({
-      domain: settings.short_io_domain,
+      domain: settings.domain,
       originalURL: urlActive,
     }),
   });
@@ -103,4 +107,21 @@ export async function shortIo(urlActive: string): Promise<EncurtadorDevData | Er
   return new Error(
     "Erro ao encurtar a url. Verifique se encurtador.dev está ativo ou se há uma nova versão o addon-clipping."
   );
+}
+
+
+export async function shlink(urlActive: string): Promise<EncurtadorDevData | Error> {
+  const settings = store.get<Settings>("settings");
+
+  const serverInfo: ServerInfo = {
+    baseUrl: settings.domain,
+    apiKey: settings.token,
+  };
+  const apiClient = new ShlinkApiClient(new FetchHttpClient(), serverInfo);
+
+  const shortUrl = await apiClient.createShortUrl({
+    longUrl: urlActive,  
+  });
+
+  return { urlEncurtada: shortUrl.shortUrl } as EncurtadorDevData;
 }

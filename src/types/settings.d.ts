@@ -1,6 +1,6 @@
 export interface Settings {
-  short_io_domain: string;
-  short_io_token: string;
+  domain: string;
+  token: string;
   emoji_header: string;
   emoji_link: string;
   emoji_resume: string;

@@ -10,8 +10,8 @@ interface Actions {
 
 export const useSettings = create<Settings & Actions>((set, get) => {
   return {
-    short_io_domain: "",
-    short_io_token: "",
+    domain: "",
+    token: "",
     emoji_header: "✂️ Clipping ✂️",
     emoji_link: "🌐",
     emoji_resume: "💬",
@@ -22,16 +22,16 @@ export const useSettings = create<Settings & Actions>((set, get) => {
         set(values);
       }
       const {
-        short_io_domain,
-        short_io_token,
+        domain,
+        token,
         emoji_header,
         emoji_link,
         emoji_resume,
         dateClipping,
       } = get();
       return {
-        short_io_domain,
-        short_io_token,
+        domain,
+        token,
         emoji_header,
         emoji_link,
         emoji_resume,

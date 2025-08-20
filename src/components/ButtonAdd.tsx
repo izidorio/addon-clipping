@@ -1,5 +1,5 @@
 import { Button } from "./Button";
-import { scrapeContentActivePage, shortIo } from "../services";
+import { scrapeContentActivePage, shlink } from "../services";
 import { MagicWand } from "@phosphor-icons/react";
 import { useClipping } from "../store";
 import { toast } from "../utils";
@@ -18,11 +18,11 @@ export function ButtonAdd() {
       func: scrapeContentActivePage,
     });
 
-    setLoading(false);
+    
 
     if (result) {
       // const shortUrl = await shortenUrl(result.urlActive);
-      const shortUrl = await shortIo(result.urlActive);
+      const shortUrl = await shlink(result.urlActive);
 
       if (shortUrl instanceof Error) {
         toast.error(shortUrl.message);
@@ -37,6 +37,8 @@ export function ButtonAdd() {
         title: result.title,
       });
     }
+
+    setLoading(false);
   }
   return (
     <Button width="full" onClick={handleClipping} isLoading={isLoading}>
