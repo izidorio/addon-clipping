@@ -1,6 +1,6 @@
 # addon-clipping
 
-Faz a captura da página aberta criando um resumo e encurtando a url ( utilizando a API do encurtador.dev®) para montar um clipping de notícias.
+Faz a captura da página aberta criando um resumo e encurtando a url para montar um clipping de notícias.
 
 <center>
 <img src="./commons/clipping.gif" width="400">
